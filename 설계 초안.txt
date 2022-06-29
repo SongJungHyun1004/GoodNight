@@ -1,0 +1,24 @@
+첫 화면
+적정수면시간을 계산해주고 알람을 울려주는 앱 소개
+렘수면 얘기, 90분 주기, 잠드는데 평균 14분 정도 걸린다
+개운하게 일어나세요!
+
+설정 화면
+언제 잠들 예정?
+지금 버튼
+시간 설정 버튼
+
+알람 모드 
+진동 
+소리
+
+벨소리
+a
+b
+c
+
+
+참고
+https://m.blog.naver.com/broun_edu/221673822121
+https://sleepyti.me/
+https://m.health.chosun.com/svc/news_view.html?contid=2022041801345
