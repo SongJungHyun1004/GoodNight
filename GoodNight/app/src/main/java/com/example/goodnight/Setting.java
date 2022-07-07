@@ -3,7 +3,10 @@ package com.example.goodnight;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,9 +15,10 @@ import java.util.Calendar;
 public class Setting extends AppCompatActivity {
     Button b;
     TimePicker tp;
-    Calendar calendar;
+    TextView tv;
+    RadioGroup rg;
 
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
 
@@ -26,16 +30,33 @@ public class Setting extends AppCompatActivity {
             }
         });
 
-        tp = (TimePicker) findViewById(R.id.timePicker);
+        tp = findViewById(R.id.timePicker);
+        tv = findViewById(R.id.timeText);
 
-        calendar = Calendar.getInstance();
-        int hour, min;
-        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M){
-            hour = tp.getHour();
-            min = tp.getMinute();
-        }else{
-            hour = tp.getCurrentHour();
-            min = tp.getCurrentMinute();
-        }
+        tp.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker timePicker, int hour, int minute) {
+                if (hour > 12) {
+                    hour -= 12;
+                    tv.setText("오후 " + hour + "시 " + minute + "분 선택");
+                } else {
+                    tv.setText("오전 " + hour + "시 " + minute + "분 선택");
+                }
+            }
+        });
+
+        rg = findViewById(R.id.radioGroup);
+
+        RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == R.id.radioButton1) {
+                    Toast.makeText(Setting.this, "sound1 선택", Toast.LENGTH_SHORT).show();
+                } else if (i == R.id.radioButton2) {
+                    Toast.makeText(Setting.this, "sound2 선택", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        rg.setOnCheckedChangeListener(radioGroupButtonChangeListener);
     }
 }
