@@ -3,7 +3,9 @@ package com.example.goodnight;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -16,6 +18,8 @@ public class Setting extends AppCompatActivity {
     Button b;
     TimePicker tp;
     TextView tv;
+    Switch ss;
+    Switch vs;
     RadioGroup rg;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,29 @@ public class Setting extends AppCompatActivity {
                     tv.setText("오후 " + hour + "시 " + minute + "분 선택");
                 } else {
                     tv.setText("오전 " + hour + "시 " + minute + "분 선택");
+                }
+            }
+        });
+
+        ss = findViewById(R.id.soundSwitch);
+        vs = findViewById(R.id.vibrateSwitch);
+        ss.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    Toast.makeText(Setting.this, "소리 on", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(Setting.this, "소리 off", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        vs.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    Toast.makeText(Setting.this, "진동 on", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(Setting.this, "진동 off", Toast.LENGTH_SHORT).show();
                 }
             }
         });
