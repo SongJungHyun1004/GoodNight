@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="300dp"
-        android:text="시간 선택" />
+        android:text="시간 선택(눈감고 눕기 전으로 선택해주세요)" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -103,6 +103,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:text="메인화면" />
+        android:text="확인" />
 
 </FrameLayout>
