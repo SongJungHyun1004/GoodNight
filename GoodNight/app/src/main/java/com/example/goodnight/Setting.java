@@ -3,8 +3,11 @@ package com.example.goodnight;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -22,6 +25,7 @@ public class Setting extends AppCompatActivity {
     Switch ss;
     Switch vs;
     RadioGroup rg;
+    int h, m;
     int soundFlag = 1;
     int vibrateFlag = 0;
     int ringFlag;
@@ -46,6 +50,8 @@ public class Setting extends AppCompatActivity {
         tp.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker timePicker, int hour, int minute) {
+                h = hour;
+                m = minute;
                 if (hour > 12) {
                     hour -= 12;
                     tv.setText("오후 " + hour + "시 " + minute + "분 선택");
@@ -103,9 +109,41 @@ public class Setting extends AppCompatActivity {
 
     public void popupDialog(){
         dialog.show();
-        /*
-        일어날 시간 목록 중 선택하는 기능
-         */
+        //일어날 시간 목록 중 선택하는 기능
+        m += 14;
+        final String[] id = new String[5];
+        for(int i = 0; i < 5; i++){
+            int h1 = h;
+            int m1 = m;
+            int cycle = i+3;
+            String ampm = "오전 ";
+            m1 += 30*cycle;
+            h1 += m1/60;
+            m1 = m1%60;
+            h1 += cycle;
+            if (h1 >= 12){
+                ampm = "오후 ";
+                if (h1 == 12){
+                }else{
+                    h1 -= 12;
+                    if (h1 >= 12){
+                        ampm = "오전 ";
+                        h1 -= 12;
+                    }
+                }
+            }
+            id[i] = cycle+" cycles : "+ ampm + h1 + "시 "+ m1 + "분";
+        }
+        ListView list = dialog.findViewById(R.id.listview);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,id);
+        list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getApplicationContext(),id[i],Toast.LENGTH_SHORT).show();
+            }
+        });
+        //확인버튼으로 팝업창 닫기
         Button checkButton = dialog.findViewById(R.id.check);
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override

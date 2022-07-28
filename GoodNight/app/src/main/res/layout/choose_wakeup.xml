@@ -3,12 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="시간 선택 팝업창" />
+        android:text="일어날 시간을 고르세요"
+        android:layout_gravity="center|top"/>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="wrap_content"
+        android:layout_height="325dp"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/check"
